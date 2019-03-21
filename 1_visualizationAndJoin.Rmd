@@ -39,21 +39,38 @@ For the rest of this training, **you must set your working directory** like
 
   /home/*type_your_account*/Documents/RTraining_06132018/
   
-by using `setwd("/home/*type_your_account*/Documents/RTraining_06132018/")` 
+by using **`setwd("/home/*type_your_account*/Documents/RTraining_06132018/")`**
+
+
+```{r}
+# what is my user info?
+print("What is my user Info?")
+Sys.getenv('USER')
+
+filePath <- paste0("/home/", Sys.getenv('USER'),"/Documents/RTraining_06132018/")
+
+# set a working directory
+setwd(filePath)
+
+# what is my current working directory?
+print("What is my current working directory?")
+getwd()
+```
+
 
 **Make sure** that 
  1. Everything is *case-sensitive*,
  2. You provide your accurate account name to AHRI R-Server (for example, *ahritrain8*), and
  3. You use forwarded slash ('/') instead of backslash ('\').
 
-> Note: **Documents** begins with large 'D' and small 's'.
+> Note: **Documents** begins with large 'D' and ends with small 's'.
 
 
 ### Loading a file
 We will load a ACS ULE file that have used for the past training. Note: the ULE ACS data is saved at the subfolder *inputFiles*.
 
 ```{r, ACSread, warning = FALSE, message=FALSE}
-ACS_ULE_20132017 <- read_csv("inputFiles/ACS_ULE_20132017.csv")
+ACS_ULE_20132017 <- read_csv(paste0(filePath,"inputFiles/ACS_ULE_20132017.csv"))
 ```
 <br>
 
@@ -191,7 +208,7 @@ ACS_ULE$Dir.OEMName %>% unique()
 Let's load a company name lookup table that is saved at inputFiles by using `read_csv()`.
 
 ```{r, readTable, warning = FALSE, message=FALSE}
-ACScompanyUpdate <- read_csv("inputFiles/ACScompanyUpdate.csv")
+ACScompanyUpdate <- read_csv(paste0(filePath,"inputFiles/ACScompanyUpdate.csv"))
 ACScompanyUpdate %>% head()
 ```
 <br>  
@@ -248,7 +265,7 @@ After NextGen Directory, most of BMGs are newly mapped. Reference numbers may ha
 #### 1. Load Directory Data
 
 ```{r, loadDir, warning = FALSE, message=FALSE}
-Dir_ULE <- read_csv("inputFiles/Dir_ULE.csv")
+Dir_ULE <- read_csv(paste0(filePath,"inputFiles/Dir_ULE.csv"))
 ```
 <br>  
 
