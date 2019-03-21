@@ -39,18 +39,18 @@ For the rest of this training, **you must set your working directory** like
 
   /home/*type_your_account*/Documents/RTraining_06132018/
   
-by using **`setwd("/home/*type_your_account*/Documents/RTraining_06132018/")`**
+by using **`setwd("/home/*type_your_account*/Documents/RTraining_06132018/")`** only you are using non-markdown scripts.
 
 
-```{r}
+```{r setGetWd, warning = FALSE, message=FALSE}
 # what is my user info?
 print("What is my user Info?")
 Sys.getenv('USER')
 
 filePath <- paste0("/home/", Sys.getenv('USER'),"/Documents/RTraining_06132018/")
 
-# set a working directory
-setwd(filePath)
+# set a working directory: do not run in Rmd
+# setwd(filePath)
 
 # what is my current working directory?
 print("What is my current working directory?")
@@ -80,6 +80,14 @@ Then, make a copy of the original ULE ACS data frame by using `ACS_ULE <- ACS_UL
 ACS_ULE <- ACS_ULE_20132017
 ```
 <br>
+
+Because `ACS_ULE_20132017` has pre-cleaned fields that are outcome of the following scripts, let's make it back to original states.
+
+```{r revert, warning = FALSE, message=FALSE} 
+
+ACS_ULE <- ACS_ULE %>% select(-power95F, -splitPkg, -DirCompany)
+
+```
 
 ### Making names *syntactically* correct and dropping missing records
 
